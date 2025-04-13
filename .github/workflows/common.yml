@@ -38,4 +38,4 @@ jobs:
           echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" | base64 --decode > firebase-key.json
           export GOOGLE_APPLICATION_CREDENTIALS=firebase-key.json
           export PYTHONPATH=$(pwd)
-          python crawler/update_firestore.py
+          python updates/updates_common.py
