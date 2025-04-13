@@ -30,6 +30,17 @@ jobs:
       - name: 의존성 설치
         run: |
           pip install -r requirements.txt
+      
+      - name: Playwright 브라우저 캐싱
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright 
+          key: playwright-${{ runner.os }}
+          restore-keys: |
+            playwright-
+      
+      - name: Playwright 설치 (캐싱 활용)
+        run: python3 -m playwright install --with-deps
 
       - name: Firebase 인증키 설정 및 실행
         env:
