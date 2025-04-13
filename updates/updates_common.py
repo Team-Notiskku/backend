@@ -1,16 +1,12 @@
 from configs.config_common import BASE_URL, XPATH
 from configs.config_firebase import db
+from crawler.crawler_common import generate_notice_hash
 from playwright.sync_api import sync_playwright
 from urllib.parse import urljoin
-import hashlib
 from google.cloud import firestore
 
-def generate_notice_hash(notice_type, title, uploader):
-    key = f"{notice_type.strip()}|{title.strip()}|{uploader.strip()}"
-    return hashlib.md5(key.encode()).hexdigest()
-
-def get_common(base_url, xpaths):
-    max_pages = 10 ## 공지 최대 100개까지 로딩
+def update_common(base_url, xpaths):
+    max_pages = 2 ## 최대 20개까지 로딩
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -64,5 +60,4 @@ def get_common(base_url, xpaths):
 
         browser.close()
 
-
-get_common(BASE_URL, XPATH)
+update_common(BASE_URL, XPATH)
