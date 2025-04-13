@@ -43,6 +43,7 @@ def get_common(base_url, xpaths):
                     ## hash (title + uploader)
                     hash = generate_notice_hash(notice_type, title, uploader)
 
+                    ## id 필드 뺐음
                     notice_data = {
                         "type": notice_type,
                         "title": title,
