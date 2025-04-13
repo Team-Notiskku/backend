@@ -37,4 +37,5 @@ jobs:
         run: |
           echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > firebase-key.json
           export GOOGLE_APPLICATION_CREDENTIALS=firebase-key.json
+          export PYTHONPATH=$(pwd)
           python updates/updates_common.py
