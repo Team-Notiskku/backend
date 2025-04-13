@@ -9,7 +9,7 @@ for name in SHEET_NAMES:
     elif name in other_dept:
         data = get_exceptions(name, DEPT_URLS[name], DEPT_XPATHS[name], -1)
     else:
-        data = get_general(DEPT_URLS[name], DEPT_XPATHS[name], -1)
+        data = get_general(DEPT_URLS[name], DEPT_XPATHS[name])
     
     # if data:
     #     update_google_sheets(SPREADSHEET_ID, name, data, 2)

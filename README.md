@@ -1,8 +1,6 @@
 ## ✅ Planned Architecture
 
-![이미지 설명](notiskku_architecture.png)
-
-cf. testing frameworks : pytest
+![이미지 설명](/assets/notiskku_architecture.png)
 
 ---
 ## Python Environments

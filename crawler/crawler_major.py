@@ -11,7 +11,7 @@ for name in SHEET_NAMES:
     elif name in other_major:
         data = get_exceptions(name, MAJOR_URLS[name], MAJOR_XPATHS[name], -1)
     else:
-        data = get_general(MAJOR_URLS[name], MAJOR_XPATHS[name], -1)
+        data = get_general(MAJOR_URLS[name], MAJOR_XPATHS[name])
     
     # if data:
     #     update_google_sheets(SPREADSHEET_ID, name, data, 2)

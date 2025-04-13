@@ -2,9 +2,8 @@ from playwright.sync_api import sync_playwright
 from urllib.parse import urljoin
 import re
 
-def get_general(base_url, xpaths, latest_id):
+def get_general(base_url, xpaths):
     max_pages = 10 
-    
     notices = [] 
 
     with sync_playwright() as p:
