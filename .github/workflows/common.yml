@@ -35,7 +35,7 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS }}
         run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > firebase-key.json
+          echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" | base64 --decode > firebase-key.json
           export GOOGLE_APPLICATION_CREDENTIALS=firebase-key.json
           export PYTHONPATH=$(pwd)
-          python updates/updates_common.py
+          python crawler/update_firestore.py
