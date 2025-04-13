@@ -61,3 +61,4 @@ def update_common(base_url, xpaths):
         browser.close()
 
 update_common(BASE_URL, XPATH)
+print("업데이트가 완료되었습니다. 종료합니다.")
