@@ -1,4 +1,5 @@
 from crawler.final_modules import get_xpath
+import pytest
 
 def test_전체공지_xpath():
     xpath = get_xpath("전체", None, None)
@@ -38,3 +39,9 @@ def test_학과_예외_xpath():
         "link": '//*[@id="jwxe_main_content"]/div/div/div/ul/li[{}]/dl/dt/a'
     }
     assert xpath == expected_xpath
+
+def test_알_수_없는_공지_예외():
+    with pytest.raises(ValueError) as exc_info:
+        get_xpath("기타", "경영대학", "경영학과")
+    
+    assert "알 수 없는 공지" in str(exc_info.value)
