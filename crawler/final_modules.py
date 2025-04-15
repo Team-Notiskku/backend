@@ -31,7 +31,7 @@ def get_base_url(type, department, major):
         return MAJOR_URLS.get(major, "")  
     else:
         raise ValueError(f"알 수 없는 공지: {type, department, major}")\
-        
+
 def get_notice(type, department, major, max_pages):
     base_url = get_base_url(type, department, major)
     xpaths = get_xpath(type, department, major)
@@ -47,7 +47,20 @@ def get_notice(type, department, major, max_pages):
             
             page.goto(full_url)
             page.wait_for_load_state("load")
-            for i in range(1, 11):
+
+            pinned_count = 0
+
+            if department in pin_dept or major in pin_major:
+                if major == "건축학과(건축학계열)":
+                    pinned_notices = page.locator('//*[@id="item_body"]/div[2]/div[1]/div/div[2]/div/div/div/ul/li/dl/dt[contains(@class, "board-list-content-top")]')
+                else:
+                    pinned_notices = page.locator('//*[@id="jwxe_main_content"]/div/div/div[2]/ul/li/dl/dt[contains(@class, "board-list-content-top")]')
+                pinned_count = pinned_notices.count()  # 고정 공지 개수
+            
+            notice_count = 0
+            i = pinned_count+1
+
+            while notice_count < 10:
                 try:
                     title = page.locator(xpaths["title"].format(i)).inner_text(timeout=1000)
                     try:
@@ -81,6 +94,8 @@ def get_notice(type, department, major, max_pages):
                     }
                     ## DB 저장
                     db.collection("notices").document(hash).set(notice_data, merge=True)
+                    notice_count+=1
+                    i+=1
 
                 except Exception as e:
                     print(f"[{type} - {department} - {major}] {i-1}번 공지 이후로 크롤링 종료됨. Error: {e}")
