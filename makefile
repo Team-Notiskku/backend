@@ -1,7 +1,9 @@
 init:
 	PYTHONPATH=. python crawler/initialize.py
 
-
+update:
+	PYTHONPATH=. python crawler/actions_department_notice.py
+	
 ## 테스트코드
 test:	#전체 테스트
 	PYTHONPATH=. pytest -v

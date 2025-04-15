@@ -32,75 +32,107 @@ def get_base_url(type, department, major):
     else:
         raise ValueError(f"알 수 없는 공지: {type, department, major}")\
 
+def try_or_default(func, default):
+    try:
+        return func()
+    except:
+        return default
+
+def get_views(page, xpaths, i):
+    return page.locator(xpaths["views"].format(i)).inner_text(timeout=1000) if xpaths["views"] else 'null'
+
+def clean_notice_fields(department, major, title, date, views):
+    if department == "약학대학":
+        match = re.match(r"^\d+\.\s*", title)
+        if match:
+            title = title[match.end():]
+    if department == "의과대학":
+        views = views[4:]
+    if major == "화학과":
+        date = date[14:]
+        views = views[6:]
+
 def get_notice(type, department, major, max_pages):
     base_url = get_base_url(type, department, major)
     xpaths = get_xpath(type, department, major)
-    
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
         for page_num in range(max_pages):
+            # 페이지 URL 구성
             if department == "약학대학":
-                cur_page = page_num+1
+                cur_page = page_num + 1
                 full_url = f"{base_url}&page={cur_page}#subcon"
             elif department == "의과대학":
-                cur_page = page_num+1
+                cur_page = page_num + 1
                 notice_url = f"?keyword=&startpage=1&bcode=nt&pg={cur_page}"
                 full_url = urljoin(base_url, notice_url)
-            else: 
+            else:
                 offset = page_num * 10
                 notice_url = f"?mode=list&&articleLimit=10&article.offset={offset}"
                 full_url = urljoin(base_url, notice_url)
-            
+
             page.goto(full_url)
             page.wait_for_load_state("load")
 
-            pinned_count = 0
-
             if department in pin_dept or major in pin_major:
                 if major == "건축학과(건축학계열)":
-                    pinned_notices = page.locator('//*[@id="item_body"]/div[2]/div[1]/div/div[2]/div/div/div/ul/li/dl/dt[contains(@class, "board-list-content-top")]')
+                    pinned_notices = page.locator(
+                        '//*[@id="item_body"]/div[2]/div[1]/div/div[2]/div/div/div/ul/li/dl/dt[contains(@class, "board-list-content-top")]')
                 else:
-                    pinned_notices = page.locator('//*[@id="jwxe_main_content"]/div/div/div[2]/ul/li/dl/dt[contains(@class, "board-list-content-top")]')
-                pinned_count = pinned_notices.count()  # 고정 공지 개수
-            
+                    pinned_notices = page.locator(
+                        '//*[@id="jwxe_main_content"]/div/div/div[2]/ul/li/dl/dt[contains(@class, "board-list-content-top")]')
+                pinned_count = pinned_notices.count()
+
+                for i in range(1, pinned_count + 1):
+                    try:
+                        title = page.locator(xpaths["title"].format(i)).inner_text(timeout=1000)
+                        category = try_or_default(lambda: page.locator(xpaths["category"].format(i)).inner_text(timeout=1000), "없음")
+                        uploader = page.locator(xpaths["uploader"].format(i)).inner_text(timeout=1000)
+                        date = page.locator(xpaths["date"].format(i)).inner_text(timeout=1000)
+                        views = get_views(page, xpaths, i)
+                        link = urljoin(base_url, page.locator(xpaths["link"].format(i)).get_attribute("href"))
+
+                        clean_notice_fields(department, major, title, date, views)
+
+                        hash = generate_hash(type, department, major, title, uploader)
+
+                        notice_data = {
+                            "type": type,
+                            "department": department,
+                            "major": major,
+                            "title": title,
+                            "category": category,
+                            "uploader": uploader,
+                            "date": date,
+                            "views": views,
+                            "url": link,
+                            "isPinned": True,
+                            "updated_at": firestore.SERVER_TIMESTAMP,
+                        }
+                        db.collection("notices").document(hash).set(notice_data, merge=True)
+                    except Exception as e:
+                        print(f"[{type} - {department} - {major}] 고정공지 {i}번 에러: {e}")
+
             notice_count = 0
-            i = pinned_count+1
-            
+            i = (pinned_count if department in pin_dept or major in pin_major else 0) + 1
             per_page = 10
+
             while notice_count < per_page:
                 try:
                     title = page.locator(xpaths["title"].format(i)).inner_text(timeout=1000)
-                    try:
-                        category = page.locator(xpaths["category"].format(i)).inner_text(timeout=1000)
-                    except:
-                        category = "없음"
+                    category = try_or_default(lambda: page.locator(xpaths["category"].format(i)).inner_text(timeout=1000), "없음")
                     uploader = page.locator(xpaths["uploader"].format(i)).inner_text(timeout=1000)
                     date = page.locator(xpaths["date"].format(i)).inner_text(timeout=1000)
-                    if xpaths["views"] != "" :
-                        views = page.locator(xpaths["views"].format(i)).inner_text(timeout=1000)
-                    else:
-                        views = 'null'
-                    link = page.locator(xpaths["link"].format(i)).get_attribute("href")
-                    link = urljoin(base_url, link)
-                    
-                    if department == "약학대학":
-                        match = re.match(r"^\d+\.\s*", title)
-                        if match:
-                            title = title[match.end():]
-                    
-                    if department == "의과대학":
-                        views = views[4:]
+                    views = get_views(page, xpaths, i)
+                    link = urljoin(base_url, page.locator(xpaths["link"].format(i)).get_attribute("href"))
 
-                    if major == "화학과":
-                        date = date[14:]
-                        views = views[6:]
+                    clean_notice_fields(department, major, title, date, views)
 
-                    ## hash (title + uploader)
                     hash = generate_hash(type, department, major, title, uploader)
 
-                    ## id 필드 뺐음
                     notice_data = {
                         "type": type,
                         "department": department,
@@ -111,15 +143,15 @@ def get_notice(type, department, major, max_pages):
                         "date": date,
                         "views": views,
                         "url": link,
+                        "isPinned": False,
                         "updated_at": firestore.SERVER_TIMESTAMP,
                     }
-                    ## DB 저장
                     db.collection("notices").document(hash).set(notice_data, merge=True)
-                    notice_count+=1
-                    i+=1
+                    notice_count += 1
+                    i += 1
 
                 except Exception as e:
-                    print(f"[{type} - {department} - {major}] {i-1}번 공지 이후로 크롤링 종료됨. Error: {e}")
+                    print(f"[{type} - {department} - {major}] 일반공지 {i}번 에러: {e}")
                     browser.close()
                     return
 
