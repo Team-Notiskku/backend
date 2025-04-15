@@ -1,5 +1,5 @@
 import hashlib
-from crawler.final_modules import generate_hash 
+from crawler.modules import generate_hash 
 
 def test_동일한_공지는_동일한_해시():
     h1 = generate_hash("단과대", "소프트웨어융합대학", "소프트웨어학과", "첫번째 공지사항", "안지운")

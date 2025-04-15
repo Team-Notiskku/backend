@@ -1,5 +1,5 @@
 from configs.config_major import MAJOR_URLS, MAJOR_XPATHS, pin_major, other_major
-from modules import get_general, get_pinned, get_exceptions
+from unused.unused_modules import get_general, get_pinned, get_exceptions
 
 SHEET_NAMES = list(MAJOR_URLS.keys())
 

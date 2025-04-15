@@ -1,5 +1,5 @@
-common:
-	PYTHONPATH=. python crawler/crawler_common.py
+init:
+	PYTHONPATH=. python crawler/initialize.py
 
 
 ## 테스트코드
@@ -14,3 +14,6 @@ test_xpath:
 
 test_base_url:
 	PYTHONPATH=. pytest tests/test_base_url.py -v
+
+#common:
+# 	PYTHONPATH=. python crawler/crawler_common.py

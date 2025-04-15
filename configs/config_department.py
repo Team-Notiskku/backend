@@ -6,7 +6,7 @@ DEPT_URLS = {
     "사회과학대학": "https://sscience.skku.edu/sscience/community/under_notice.do",
     "경영대학": "https://biz.skku.edu/bizskk/notice.do",
     "사범대학": "https://coe.skku.edu/coe/community/under_notice.do",
-    "예술대학": "https://art.skku.edu/art/community/under_notice.do",
+    "예술대학": "https://art.skku.edu/art/notice.do",
     "자연과학대학": "https://cscience.skku.edu/cscience/community/under_notice.do",
     "정보통신대학": "https://ice.skku.edu/ice/community/notice.do",
     "소프트웨어융합대학": "https://sw.skku.edu/sw/notice.do",

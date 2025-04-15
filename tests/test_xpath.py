@@ -1,4 +1,4 @@
-from crawler.final_modules import get_xpath
+from crawler.modules import get_xpath
 import pytest
 
 def test_전체공지_xpath():

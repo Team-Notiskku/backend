@@ -1,4 +1,4 @@
-from crawler.final_modules import get_base_url
+from crawler.modules import get_base_url
 import pytest
 
 def test_전체공지_base_url():

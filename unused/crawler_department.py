@@ -1,5 +1,5 @@
 from configs.config_department import DEPT_URLS, DEPT_XPATHS, pin_dept, other_dept, has_views_dept
-from modules import get_general, get_pinned, get_exceptions
+from unused.unused_modules import get_general, get_pinned, get_exceptions
 
 SHEET_NAMES = list(DEPT_URLS.keys())
 
