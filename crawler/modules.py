@@ -65,7 +65,7 @@ def get_pinned(base_url, xpaths, latest_id, is_arch):
     max_pages = 10 
     
     notices = []  
-
+ 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()

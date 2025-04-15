@@ -16,7 +16,7 @@ DEPT_URLS = {
     "스포츠과학대학": "https://sport.skku.edu/sports/community/under_notice.do",
     "의과대학": "https://www.skkumed.ac.kr/community_notice.asp",
     "성균융합원": "https://ics.skku.edu/ics/community/under_notice.do"
-}
+} 
 
 pin_dept = ["경영대학"]
 other_dept = ["약학대학", "의과대학"]
