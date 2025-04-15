@@ -11,3 +11,6 @@ test_hash:
 
 test_xpath:
 	PYTHONPATH=. pytest tests/test_xpath.py -v
+
+test_base_url:
+	PYTHONPATH=. pytest tests/test_base_url.py -v

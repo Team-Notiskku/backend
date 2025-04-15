@@ -20,3 +20,13 @@ def get_xpath(type: str, department: str = "", major: str = ""):
         return MAJOR_XPATHS.get(major, {})  
     else:
         raise ValueError(f"알 수 없는 공지: {type, department, major}")
+    
+def get_base_url(type: str, department: str = "", major: str = ""):
+    if type == "전체":
+        return BASE_URL
+    elif type == "단과대":
+        return DEPT_URLS.get(department, "")
+    elif type == "학과":
+        return MAJOR_URLS.get(major, "")  
+    else:
+        raise ValueError(f"알 수 없는 공지: {type, department, major}")
