@@ -41,9 +41,17 @@ def get_notice(type, department, major, max_pages):
         page = browser.new_page()
 
         for page_num in range(max_pages):
-            offset = page_num * 10
-            notice_url = f"?mode=list&&articleLimit=10&article.offset={offset}"
-            full_url = urljoin(base_url, notice_url)
+            if department == "약학대학":
+                cur_page = page_num+1
+                full_url = f"{base_url}&page={cur_page}#subcon"
+            elif department == "의과대학":
+                cur_page = page_num+1
+                notice_url = f"?keyword=&startpage=1&bcode=nt&pg={cur_page}"
+                full_url = urljoin(base_url, notice_url)
+            else: 
+                offset = page_num * 10
+                notice_url = f"?mode=list&&articleLimit=10&article.offset={offset}"
+                full_url = urljoin(base_url, notice_url)
             
             page.goto(full_url)
             page.wait_for_load_state("load")
@@ -59,8 +67,9 @@ def get_notice(type, department, major, max_pages):
             
             notice_count = 0
             i = pinned_count+1
-
-            while notice_count < 10:
+            
+            per_page = 10
+            while notice_count < per_page:
                 try:
                     title = page.locator(xpaths["title"].format(i)).inner_text(timeout=1000)
                     try:
@@ -75,6 +84,18 @@ def get_notice(type, department, major, max_pages):
                         views = 'null'
                     link = page.locator(xpaths["link"].format(i)).get_attribute("href")
                     link = urljoin(base_url, link)
+                    
+                    if department == "약학대학":
+                        match = re.match(r"^\d+\.\s*", title)
+                        if match:
+                            title = title[match.end():]
+                    
+                    if department == "의과대학":
+                        views = views[4:]
+
+                    if major == "화학과":
+                        date = date[14:]
+                        views = views[6:]
 
                     ## hash (title + uploader)
                     hash = generate_hash(type, department, major, title, uploader)
