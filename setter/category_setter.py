@@ -19,11 +19,12 @@ def set_notice(category):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        offset = page_num * 10
-        notice_url = f"?mode=list&&articleLimit=10&article.offset={offset}"
-        full_url = urljoin(base_url, notice_url)
-
+        
         for page_num in (10):
+            offset = page_num * 10
+            notice_url = f"?mode=list&&articleLimit=10&article.offset={offset}"
+            full_url = urljoin(base_url, notice_url)
+
             page.goto(full_url)
             page.wait_for_load_state("load")
 
