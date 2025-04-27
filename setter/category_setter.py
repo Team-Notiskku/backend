@@ -20,7 +20,7 @@ def set_notice(category):
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         
-        for page_num in (10):
+        for page_num in range(10):
             offset = page_num * 10
             notice_url = f"?mode=list&&articleLimit=10&article.offset={offset}"
             full_url = urljoin(base_url, notice_url)
