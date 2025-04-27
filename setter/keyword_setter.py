@@ -55,8 +55,8 @@ def set_notice(keyword):
                         "url": link,
                         "updated_at": firestore.SERVER_TIMESTAMP,
                     }
-                    print(notice_data["title"])
-                    print(notice_data["date"])
+                    # print(notice_data["title"])
+                    # print(notice_data["date"])
                     db.collection("notices").document(hash).set(notice_data, merge=True)
 
                 except Exception as e:
