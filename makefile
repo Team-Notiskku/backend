@@ -3,6 +3,9 @@ init:
 
 update:
 	PYTHONPATH=. python crawler/actions_department_notice.py
+
+set:
+	PYTHONPATH=. python setter/category_setter.py
 	
 ## 테스트코드
 test:	#전체 테스트

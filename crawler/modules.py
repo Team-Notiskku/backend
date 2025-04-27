@@ -2,7 +2,6 @@ from playwright.sync_api import sync_playwright
 from configs.config_common import XPATH, BASE_URL
 from configs.config_department import DEPT_XPATHS, DEPT_URLS, pin_dept
 from configs.config_major import MAJOR_XPATHS, MAJOR_URLS, pin_major
-from configs.config_common_categories import CATEGORY_BASE_URLS, CATEGORY_XPATH
 from configs.config_firebase import db
 from urllib.parse import urljoin
 from google.cloud import firestore
@@ -35,7 +34,7 @@ def get_base_url(type, department, major):
 
 def try_or_default(func, default):
     try:
-        return func()
+        return func() 
     except:
         return default
 
