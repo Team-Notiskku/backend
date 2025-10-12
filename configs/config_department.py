@@ -8,14 +8,14 @@ DEPT_URLS = {
     "사범대학": "https://coe.skku.edu/coe/community/under_notice.do",
     "예술대학": "https://art.skku.edu/art/notice.do",
     "자연과학대학": "https://cscience.skku.edu/cscience/community/under_notice.do",
-    "정보통신대학": "https://ice.skku.edu/ice/community/notice.do",
+    "정보통신대학": "https://ice.skku.edu/ice/notice.do",
     "소프트웨어융합대학": "https://sw.skku.edu/sw/notice.do",
     "공과대학": "https://enc.skku.edu/enc/notice.do",
     "약학대학": "https://pharm.skku.edu/bbs/board.php?bo_table=notice",
     "생명공학대학": "https://biotech.skku.edu/biotech/community/under_notice.do",
     "스포츠과학대학": "https://sport.skku.edu/sports/community/under_notice.do",
     "의과대학": "https://www.skkumed.ac.kr/community_notice.asp",
-    "성균융합원": "https://ics.skku.edu/ics/community/under_notice.do"
+    "성균융합원": "https://ics.skku.edu/ics/notice.do"
 } 
 
 pin_dept = ["경영대학"]
