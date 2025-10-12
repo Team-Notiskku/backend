@@ -10,7 +10,7 @@ DEPT_URLS = {
     "자연과학대학": "https://cscience.skku.edu/cscience/community/under_notice.do",
     "정보통신대학": "https://ice.skku.edu/ice/community/notice.do",
     "소프트웨어융합대학": "https://sw.skku.edu/sw/notice.do",
-    "공과대학": "https://enc.skku.edu/enc/community/under_notice.do",
+    "공과대학": "https://enc.skku.edu/enc/notice.do",
     "약학대학": "https://pharm.skku.edu/bbs/board.php?bo_table=notice",
     "생명공학대학": "https://biotech.skku.edu/biotech/community/under_notice.do",
     "스포츠과학대학": "https://sport.skku.edu/sports/community/under_notice.do",
