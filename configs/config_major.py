@@ -21,7 +21,7 @@ MAJOR_URLS = {
     "글로벌경제학과": "https://globalecon.skku.edu/gecon/notice.do",
     "통계학과": "https://stat.skku.edu/stat/community/under_notice.do",
     "경영학과": "https://skb.skku.edu/bus/notice.do?mode=list&srCategoryId1=&srSearchKey=&srSearchVal=",
-    "글로벌경영학과": "https://globalbiz.skku.edu/gba/board/notice.do",
+    "글로벌경영학과": "https://globalbiz.skku.edu/gba/notice.do",
     "교육학과": "https://skb.skku.edu/skku-edu/community/under_notice.do",
     "수학교육과": "https://skb.skku.edu/mathedu/notice.do",
     "컴퓨터교육과": "https://comedu.skku.edu/comedu/notice.do",

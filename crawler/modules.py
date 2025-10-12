@@ -5,6 +5,7 @@ from configs.config_major import MAJOR_XPATHS, MAJOR_URLS, pin_major
 from configs.config_firebase import db
 from urllib.parse import urljoin
 from google.cloud import firestore
+from configs.config_topic_map import mapper
 import re
 import hashlib
 
@@ -51,6 +52,10 @@ def clean_notice_fields(department, major, title, date, views):
     if major == "화학과":
         date = date[14:]
         views = views[6:]
+
+def send_notice(topic, title):
+    push_type = topic[0:2]
+
 
 def get_notice(type, department, major, max_pages):
     base_url = get_base_url(type, department, major)
