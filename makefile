@@ -22,3 +22,6 @@ test_base_url:
 
 #common:
 # 	PYTHONPATH=. python crawler/crawler_common.py
+
+test_dept:
+	PYTHONPATH=. python3 crawler/test_modules.py -v
