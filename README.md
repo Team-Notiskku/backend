@@ -1,6 +1,16 @@
-## ✅ Planned Architecture
+# NotiSKKU Backend
 
-![이미지 설명](/assets/notiskku_architecture.png)
+> **노티스꾸**: 성균관대학교 맞춤형 공지사항 알림 애플리케이션   
+> 학과별, 키워드별 공지를 받아보고 학사일정을 한눈에 확인하세요!
+
+_본 레포지토리는 NotiSKKU 프로젝트의 크롤링 및 데이터베이스 레포지토리입니다._    
+→ [NotiSKKU Repository 바로가기](https://github.com/Team-Notiskku/NotiSKKU)
+
+<img src="assets/app_overview_ver2.png"/>
+
+## 🚀 System Architecture
+
+<img src="assets/notiskku_architecture_ver2.jpg"/>
 
 ---
 ## Python Environments
