@@ -35,7 +35,7 @@ MAJOR_URLS = {
     "수학과": "https://skb.skku.edu/math/community/under_notice.do",
     "화학과": "https://chem.skku.edu/chem/News/notice.do",
     "소재부품융합공학과": "https://skb.skku.edu/mcce/notice.do",
-    "전자전기공학부": "https://ice.skku.edu/ice/community/notice_total.do",
+    "전자전기공학부": "https://eee.skku.edu/eee/notice_total.do",
     "차세대반도체공학연계전공": "https://ase.skku.edu/ase/notice.do",
     "글로벌융합학부 공통": "https://sco.skku.edu/sco/community/notice.do",
     "데이터사이언스융합전공": "https://sco.skku.edu/sco/community/major_data.do",
