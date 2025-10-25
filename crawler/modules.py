@@ -56,6 +56,18 @@ def clean_notice_fields(department, major, title, date, views):
 def send_notice(topic, title):
     push_type = topic[0:2]
 
+def save_notice(hash, notice_data):
+    doc_ref = db.collection("notices").document(hash)
+    doc = doc_ref.get()
+
+    # 최초 생성 시에만 created_at 추가
+    if not doc.exists:
+        notice_data["created_at"] = firestore.SERVER_TIMESTAMP
+
+    # updated_at은 항상 갱신
+    notice_data["updated_at"] = firestore.SERVER_TIMESTAMP
+
+    doc_ref.set(notice_data, merge=True)
 
 def get_notice(type, department, major, max_pages):
     base_url = get_base_url(type, department, major)
@@ -117,7 +129,7 @@ def get_notice(type, department, major, max_pages):
                             "isPinned": True,
                             "updated_at": firestore.SERVER_TIMESTAMP,
                         }
-                        db.collection("notices").document(hash).set(notice_data, merge=True)
+                        save_notice(hash, notice_data)
                     except Exception as e:
                         print(f"[{type} - {department} - {major}] 고정공지 {i}번 에러: {e}")
 
@@ -151,7 +163,7 @@ def get_notice(type, department, major, max_pages):
                         "isPinned": False,
                         "updated_at": firestore.SERVER_TIMESTAMP,
                     }
-                    db.collection("notices").document(hash).set(notice_data, merge=True)
+                    save_notice(hash, notice_data)
                     notice_count += 1
                     i += 1
 
