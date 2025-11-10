@@ -6,11 +6,11 @@
 _본 레포지토리는 NotiSKKU 프로젝트의 크롤링 및 데이터베이스 레포지토리입니다._    
 → [NotiSKKU Repository 바로가기](https://github.com/Team-Notiskku/NotiSKKU)
 
-<img src="assets/app_overview_ver2.png"/>
+<img src="assets/readme.png"/>
 
 ## 🚀 System Architecture
 
-<img src="assets/notiskku_architecture_ver2.jpg"/>
+<img src="assets/Development Architecture - Edited.jpg"/>
 
 ---
 ## Python Environments
