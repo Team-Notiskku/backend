@@ -10,7 +10,7 @@ _본 레포지토리는 NotiSKKU 프로젝트의 크롤링 및 데이터베이�
 
 ## 🚀 System Architecture
 
-<img src="assets/Development Architecture - Edited.jpg"/>
+<img src="assets/Development Architecture - Edited.png"/>
 
 ---
 ## Python Environments
