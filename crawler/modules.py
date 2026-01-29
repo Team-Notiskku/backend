@@ -63,6 +63,8 @@ def save_notice(hash, notice_data):
     # 최초 생성 시에만 created_at 추가
     if not doc.exists:
         notice_data["created_at"] = firestore.SERVER_TIMESTAMP
+        notice_data["push_sent"] = False
+        notice_data["push_sent_at"] = None
 
     # updated_at은 항상 갱신
     notice_data["updated_at"] = firestore.SERVER_TIMESTAMP
