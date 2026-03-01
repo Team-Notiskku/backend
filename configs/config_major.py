@@ -47,7 +47,7 @@ MAJOR_URLS = {
     "건설환경공학부": "https://cal.skku.edu/index.php?hCode=BOARD&bo_idx=17",
     "건축학과(건축학계열)": "https://arch.skku.edu/arch/NEWS/notice.do",
     "기계공학부": "https://mech.skku.edu/me/notice.do",
-    "나노공학과": "https://nano.skku.edu/bbs/board.php?tbl=bbs42",
+    "나노공학과": "http://nano.skku.edu/bbs/board.php?tbl=bbs42",
     "신소재공학부": "https://amse.skku.edu/AMSE/notice.do",
     "시스템경영공학과": "https://sme.skku.edu/iesys/notice.do",
     "화학공학/고분자공학부": "https://cheme.skku.edu/notice/",
