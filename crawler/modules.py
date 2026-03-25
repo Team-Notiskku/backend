@@ -93,8 +93,9 @@ def get_notice(type, department, major, max_pages):
                 notice_url = f"?mode=list&&articleLimit=10&article.offset={offset}"
                 full_url = urljoin(base_url, notice_url)
 
-            page.goto(full_url)
-            page.wait_for_load_state("load")
+            page.goto(full_url, wait_until="domcontentloaded", timeout=60000)
+
+            pinned_count = 0 
 
             if department in pin_dept or major in pin_major:
                 if major == "건축학과(건축학계열)":
@@ -103,6 +104,7 @@ def get_notice(type, department, major, max_pages):
                 else:
                     pinned_notices = page.locator(
                         '//*[@id="jwxe_main_content"]/div/div/div[2]/ul/li/dl/dt[contains(@class, "board-list-content-top")]')
+                
                 pinned_count = pinned_notices.count()
 
                 for i in range(1, pinned_count + 1):
@@ -136,7 +138,7 @@ def get_notice(type, department, major, max_pages):
                         print(f"[{type} - {department} - {major}] 고정공지 {i}번 에러: {e}")
 
             notice_count = 0
-            i = (pinned_count if department in pin_dept or major in pin_major else 0) + 1
+            i = pinned_count + 1
             per_page = 10
 
             while notice_count < per_page:
